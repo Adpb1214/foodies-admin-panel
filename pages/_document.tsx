@@ -9,7 +9,7 @@ export default function Document() {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="true"
+          
         />
 <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Sofadi+One&display=swap" rel="stylesheet"/>
 
