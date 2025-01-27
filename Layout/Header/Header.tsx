@@ -29,7 +29,7 @@ const settings = ["profile", "login", "Registration"];
 
 export default function Header() {
   const [token, setToken] = useState<string | null>(null);
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [firstName, setFirstName] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -68,14 +68,14 @@ export default function Header() {
       sx={{
         backgroundColor: mode === "dark" ? "#333" : "#3E2F5B",
         marginBottom: "0px",
-        height:"75px"
+        height: "75px",
       }}
     >
       <Container maxWidth="xl">
         <Toolbar>
           {/* Logo */}
           <Typography
-          className="glitter-text"
+            className="glitter-text"
             variant="h5"
             noWrap
             sx={{
@@ -86,7 +86,6 @@ export default function Header() {
               letterSpacing: ".3rem",
               // color: "red",
               textDecoration: "none",
-              
             }}
           >
             Foodiz
@@ -112,7 +111,10 @@ export default function Header() {
           >
             <List>
               <ListItem button key="Home" onClick={toggleMobileMenu}>
-                <Link href="/" style={{ textDecoration: "none", color: "black" }}>
+                <Link
+                  href="/"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <ListItemText primary="Home" />
                 </Link>
               </ListItem>
@@ -129,9 +131,10 @@ export default function Header() {
             </List>
           </Drawer>
 
-         
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button sx={{ my: 2, color: "white", display: "block",fontSize:"18px" }}>
+            <Button
+              sx={{ my: 2, color: "white", display: "block", fontSize: "18px" }}
+            >
               <Link href="/" style={{ textDecoration: "none", color: "white" }}>
                 Home
               </Link>
@@ -139,7 +142,12 @@ export default function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                sx={{ my: 2, color: "white", display: "block",fontSize:"18px" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontSize: "18px",
+                }}
               >
                 <Link
                   href={`/cms/${page.toLowerCase()}`}
@@ -160,7 +168,6 @@ export default function Header() {
             {mode === "light" ? <Brightness4 /> : <Brightness7 />}
           </IconButton>
 
-        
           {firstName && (
             <Typography
               variant="subtitle1"
@@ -168,7 +175,7 @@ export default function Header() {
                 fontFamily: "'Roboto Slab', serif",
                 fontWeight: 500,
                 marginRight: 2,
-                fontSize:"22px",
+                fontSize: "22px",
                 color: "skyblue",
                 animation: "fadeIn 1s ease-in-out",
               }}
@@ -180,22 +187,38 @@ export default function Header() {
             <Tooltip title="Open settings">
               <IconButton sx={{ p: 0 }} onClick={handleMenuClick}>
                 {token ? (
-                  <img
-                    src={image ? profile_pic(image) : ""}
-                    alt="Profile"
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                  />
+                  image ? (
+                    <img
+                      src={
+                        image
+                          ? profile_pic(image)
+                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
+                      } // Assuming profile_pic returns a valid URL.
+                      alt="Profile"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
+                      alt="Default Profile"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  )
                 ) : (
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
                     alt="Default Profile"
                     style={{
-                      width: "30px",
-                      height: "30px",
+                      width: "40px",
+                      height: "40px",
                       borderRadius: "50%",
                     }}
                   />
